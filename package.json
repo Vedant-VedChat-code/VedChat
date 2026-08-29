@@ -1,0 +1,12 @@
+{
+  "name": "vedchat-server",
+  "version": "1.0.0",
+  "description": "VedChat signaling and chat server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.21.3"
+  }
+}
