@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta name="theme-color" content="#111827">
+
+    <meta
+        name="description"
+        content="VedChat private messaging"
+    >
+
+    <title>VedChat</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ================= REGISTER ================= -->
+
+    <section id="registerScreen" class="screen">
+
+        <div class="register-card">
+
+            <div class="logo">
+                💬
+            </div>
+
+            <h1>VedChat</h1>
+
+            <p class="subtitle">
+                Private messaging made simple.
+            </p>
+
+            <input
+                id="nameInput"
+                type="text"
+                maxlength="40"
+                placeholder="Enter your name"
+                autocomplete="off"
+            >
+
+            <input
+                id="codeInput"
+                type="text"
+                maxlength="20"
+                placeholder="Existing friend code (optional)"
+                autocomplete="off"
+            >
+
+            <button id="registerButton">
+                Enter VedChat
+            </button>
+
+            <p id="registerStatus" class="status"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MAIN APP ================= -->
+
+    <section id="mainScreen" class="screen hidden">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="brand">
+                <span class="brand-icon">💬</span>
+                <span>VedChat</span>
+            </div>
+
+            <div class="top-actions">
+
+                <button
+                    id="addFriendButton"
+                    class="icon-button"
+                    title="Add friend"
+                >
+                    ➕
+                </button>
+
+                <button
+                    id="profileButton"
+                    class="icon-button"
+                    title="Profile"
+                >
+                    👤
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- BODY -->
+
+        <main class="app-body">
+
+            <!-- SIDEBAR -->
+
+            <aside id="sidebar" class="sidebar">
+
+                <div class="sidebar-tabs">
+
+                    <button
+                        id="friendsTab"
+                        class="tab active"
+                    >
+                        Friends
+                    </button>
+
+                    <button
+                        id="groupsTab"
+                        class="tab"
+                    >
+                        Groups
+                    </button>
+
+                </div>
+
+
+                <div id="friendsList" class="contact-list"></div>
+
+                <div
+                    id="groupsList"
+                    class="contact-list hidden"
+                ></div>
+
+
+                <button
+                    id="createGroupButton"
+                    class="bottom-action hidden"
+                >
+                    ➕ Create Group
+                </button>
+
+            </aside>
+
+
+            <!-- CHAT -->
+
+            <section class="chat">
+
+                <div
+                    id="emptyChat"
+                    class="empty-chat"
+                >
+
+                    <div class="empty-icon">
+                        💬
+                    </div>
+
+                    <h2>Welcome to VedChat</h2>
+
+                    <p>
+                        Select a friend or group to start chatting.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="chatWindow"
+                    class="chat-window hidden"
+                >
+
+                    <!-- CHAT HEADER -->
+
+                    <div class="chat-header">
+
+                        <button
+                            id="backButton"
+                            class="back-button"
+                        >
+                            ←
+                        </button>
+
+                        <div
+                            id="chatAvatar"
+                            class="avatar"
+                        >
+                            ?
+                        </div>
+
+                        <div class="chat-user">
+
+                            <strong id="chatName">
+                                Chat
+                            </strong>
+
+                            <span id="chatStatus">
+                                Offline
+                            </span>
+
+                        </div>
+
+                        <div class="chat-actions">
+
+                            <button
+                                id="callButton"
+                                title="Voice/video call"
+                            >
+                                📞
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGES -->
+
+                    <div
+                        id="messages"
+                        class="messages"
+                    ></div>
+
+
+                    <!-- TYPING / INPUT -->
+
+                    <div class="message-input-area">
+
+                        <input
+                            id="messageInput"
+                            type="text"
+                            maxlength="5000"
+                            placeholder="Type a message..."
+                            autocomplete="off"
+                        >
+
+                        <button id="sendButton">
+                            ➤
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+
+    <!-- ================= ADD FRIEND MODAL ================= -->
+
+    <div
+        id="friendModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <button
+                class="close-button"
+                data-close="friendModal"
+            >
+                ✕
+            </button>
+
+            <h2>Add Friend</h2>
+
+            <p>
+                Enter your friend's VedChat code.
+            </p>
+
+            <input
+                id="friendCodeInput"
+                type="text"
+                maxlength="20"
+                placeholder="Friend code"
+                autocomplete="off"
+            >
+
+            <button id="lookupButton">
+                Find User
+            </button>
+
+            <div
+                id="userResult"
+                class="user-result hidden"
+            >
+
+                <div id="resultAvatar" class="avatar">
+                    ?
+                </div>
+
+                <div>
+                    <strong id="resultName">
+                        User
+                    </strong>
+
+                    <small id="resultCode">
+                        CODE
+                    </small>
+                </div>
+
+                <button id="confirmAddFriend">
+                    Add
+                </button>
+
+            </div>
+
+            <p id="friendStatus" class="status"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PROFILE MODAL ================= -->
+
+    <div
+        id="profileModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <button
+                class="close-button"
+                data-close="profileModal"
+            >
+                ✕
+            </button>
+
+            <h2>Your Profile</h2>
+
+            <div
+                id="profileAvatar"
+                class="profile-avatar"
+            >
+                ?
+            </div>
+
+            <p>
+                Your VedChat code:
+            </p>
+
+            <div class="code-box">
+
+                <strong id="myCode">
+                    --------
+                </strong>
+
+                <button id="copyCodeButton">
+                    📋
+                </button>
+
+            </div>
+
+            <input
+                id="profileNameInput"
+                maxlength="40"
+                placeholder="Your name"
+            >
+
+            <button id="saveProfileButton">
+                Save Profile
+            </button>
+
+            <p id="profileStatus" class="status"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= CREATE GROUP ================= -->
+
+    <div
+        id="groupModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <button
+                class="close-button"
+                data-close="groupModal"
+            >
+                ✕
+            </button>
+
+            <h2>Create Group</h2>
+
+            <input
+                id="groupNameInput"
+                maxlength="40"
+                placeholder="Group name"
+            >
+
+            <button id="confirmCreateGroup">
+                Create Group
+            </button>
+
+            <p id="groupStatus" class="status"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= CALL MODAL ================= -->
+
+    <div
+        id="callModal"
+        class="modal hidden"
+    >
+
+        <div class="call-card">
+
+            <div class="call-avatar">
+                📞
+            </div>
+
+            <h2 id="callTitle">
+                Calling...
+            </h2>
+
+            <p id="callStatus">
+                Connecting...
+            </p>
+
+            <video
+                id="remoteVideo"
+                autoplay
+                playsinline
+            ></video>
+
+            <video
+                id="localVideo"
+                autoplay
+                muted
+                playsinline
+            ></video>
+
+            <button
+                id="endCallButton"
+                class="danger-button"
+            >
+                End Call
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- QR CODE LIBRARY -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
