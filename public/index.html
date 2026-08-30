@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta
+        name="theme-color"
+        content="#111827"
+    >
+
+    <meta
+        name="description"
+        content="VedChat - private real-time messaging and calling"
+    >
+
+    <title>VedChat</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =================================================
+         VEDCHAT APP
+    ================================================== -->
+
+    <div id="app">
+        <div class="loading-screen">
+
+            <div class="loading-logo">
+                💬
+            </div>
+
+            <h1>VedChat</h1>
+
+            <p>
+                Starting VedChat...
+            </p>
+
+            <div class="loading-spinner"></div>
+
+        </div>
+    </div>
+
+
+    <!-- =================================================
+         AUDIO ELEMENTS
+         WebRTC remote audio is attached here by app.js
+    ================================================== -->
+
+    <div id="audioContainer"></div>
+
+
+    <!-- =================================================
+         QR CODE LIBRARY
+    ================================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        defer
+    ></script>
+
+
+    <!-- =================================================
+         VEDCHAT JAVASCRIPT
+    ================================================== -->
+
+    <script
+        src="/app.js"
+        defer
+    ></script>
+
+</body>
+</html>
